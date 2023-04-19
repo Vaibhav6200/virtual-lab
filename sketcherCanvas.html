@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' integrity='sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' integrity='sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB' crossorigin='anonymous'>
+    <link rel='stylesheet' href='css/styles.css'>
+    <link rel="stylesheet" href="ChemDoodleWeb-9.5.0/install/ChemDoodleWeb.css" type="text/css">
+    <script type="text/javascript" src="ChemDoodleWeb-9.5.0/install/ChemDoodleWeb.js"></script>
+
+    <!--these two are required by the SketcherCanvas plugin-->
+    <link rel="stylesheet" href="ChemDoodleWeb-9.5.0/install/uis/jquery-ui-1.11.4.css" type="text/css">
+    <script type="text/javascript" src="ChemDoodleWeb-9.5.0/install/uis/ChemDoodleWeb-uis.js"></script>
+
+    <title> Simulation </title>
+</head>
+<body class="">
+
+    <div class="container mt-5 d-flex justify-content-center align-items-center flex-column">
+
+
+        <canvas class="" id="sketcher"></canvas>
+    </div>
+
+    <script>
+        // SKETCHER
+        let obj = {
+            floatDrawTools: true,
+            includeQuery: true,
+            includeToolbar: true,
+            // useServices: false,
+        };
+        // changes the default JMol color of hydrogen to black so it appears on white backgrounds
+        ChemDoodle.ELEMENT['H'].jmolColor = 'black';
+        // darkens the default JMol color of sulfur so it appears on white backgrounds
+        ChemDoodle.ELEMENT['S'].jmolColor = '#B9A130';
+        // initializes the SketcherCanvas
+        let sketcher = new ChemDoodle.SketcherCanvas('sketcher', 600, 400, {useServices:true, oneMolecule:true});
+        // sets terminal carbon labels to display
+        sketcher.styles.atoms_displayTerminalCarbonLabels_2D = true;
+        // sets atom labels to be colored by JMol colors, which are easy to recognize
+        sketcher.styles.atoms_useJMOLColors = true;
+        // enables overlap clear widths, so that some depth is introduced to overlapping bonds
+        sketcher.styles.bonds_clearOverlaps_2D = true;
+        // sets the shape color to improve contrast when drawing figures
+        sketcher.styles.shapes_color = 'c10000';
+        // because we do not load any content, we need to repaint the sketcher, otherwise we would just see an empty area with the toolbar
+        // however, you can instead use one of the Canvas.load... functions to pre-populate the canvas with content, then you don't need to call repaint
+        sketcher.repaint();
+
+        // // we can get all options which we can set from this website https://web.chemdoodle.com/tutorial/2d-structure-canvases/sketcher-canvas
+        // new ChemDoodle.SketcherCanvas("id", 500, 500, obj);
+
+        //the SketcherCanvas variable on this page has been named "sketcher"
+        // let mol = sketcher.getMolecule();
+        // // generating chemical formats
+        // let molFile1 = ChemDoodle.writeMOL(mol);
+        // let molFile2 = ChemDoodle.writeMOLV3(mol);
+
+        // alertMolecule(mol);
+
+        // // Generate chemical format (smiles format)
+        // let mol2 = sketcher.getMolecule();
+        // ChemDoodle.iChemLabs.writeSMILES([mol2], [], {}, function(smiles){
+        //     alert(smiles);
+        // });
+
+    </script>
+    <script src='http://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49' crossorigin='anonymous'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js' integrity='sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T' crossorigin='anonymous'></script>
+</body>
+</html>
